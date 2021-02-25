@@ -1,0 +1,17 @@
+#!/bin/bash
+if [ $HOSTNAME == "server"]; then
+sudo apt-get install nfs-kernel-server nfs-common portmap -y
+sudo apt-get install nfs-utils nfs-utils-lib
+sudo /etc/init.d/portmap start
+sudo /etc/init.d/nfs start
+sudo mkdir /home/kant/labu
+sudo chown nobody:nogroup /home/kant/labu
+sudo nano /etc/exports
+#/home/nfs 192.168.4.52(rw,sync,no_subtree_check)
+#share
+sudo exportfs -a
+/etc/init.d/nfs-kernel-server start
+sudo mount -t nfs 192.168.5.47:/home/kant/labu /mnt/labu
+
+elseif [$HOSTNAME]
+
